@@ -1,16 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const postController = require("../controllers/postController.js");
-const auth = require("../auth");
+const postController = require("../controllers/Posts.js");
+const authenticateToken = require("../middlewares/auth");
+const logger = require("../middlewares/logger");
 
-router.get("/:id", auth.requiresLogin, postController.getPost);
+router.get("/", logger, authenticateToken, postController.getPost);
 
-router.post("/add", auth.requiresLogin, postController.addPost);
+router.post("/add", logger, authenticateToken, postController.addPost);
 
-router.get("/edit/:id", auth.requiresLogin, postController.updatePost);
+router.put("/replace", logger, authenticateToken, postController.updatePost);
 
-router.post("/replace/:id", auth.requiresLogin, postController.patchPost);
+router.patch("/edit", logger, authenticateToken, postController.patchPost);
 
-router.get("/delete/:id", auth.requiresLogin, postController.deletePost);
+router.delete("/delete", logger, authenticateToken, postController.deletePost);
 
 module.exports = router;

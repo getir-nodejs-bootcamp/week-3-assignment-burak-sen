@@ -1,5 +1,2 @@
-const express = require("express");
-const router = express.Router();
-
-router;
-/* GET home page. */
+module.exports.PostRoutes = require("./posts");
+module.exports.LoginRoutes = require("./login");
